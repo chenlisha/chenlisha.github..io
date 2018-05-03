@@ -17,6 +17,8 @@
 <button onclick="getLocation()">试一试</button>
 
 <br>
+<br>
+<br>
 <a href="./upload.html">上传个人资料</a>
 
 <script>
@@ -32,7 +34,7 @@
     }
 
     function showPosition(position) {
-        x.innerHTML = "当前位置"+position+"纬度: " + position.coords.latitude +
+        x.innerHTML ="当前位置精度"+position.coords.accuracy+ "纬度: " + position.coords.latitude +
             "<br>经度: " + position.coords.longitude;
     }
 </script>
