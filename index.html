@@ -23,14 +23,19 @@
         .weui-cells:after{
             border-bottom: 0;
         }
-        .btm{
+        .btm:after{
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .btime{
             border-bottom: 1px solid #e5e5e5;
         }
         .weui-cells__title{
             font-size: 17px;
             color:#000;
         }
-      
+        .ml{
+            margin-left: 1em;
+        }
         .weui-input::-webkit-input-placeholder{
             font-size: 15px;
         }
@@ -91,18 +96,18 @@
             <button class="weui-vcode-btn" id="btnPosition">定位</button>
         </div>
     </div>
-    <div class="weui-cell btm">
+    <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">巡检次数</label></div>
         <div class="weui-cell__bd">
             <input id="f_patrol_size" class="weui-input" type="number" placeholder="请输入次数">
         </div>
     </div>
-    <!--<div class="weui-cell">-->
-        <!--<div class="weui-cell__hd"><label class="weui-label">上次巡检时间</label></div>-->
-        <!--<div class="weui-cell__bd">-->
-            <!--<input id="f_p_patrol_tm" class="weui-input" type="date" value="请选择时间">-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="weui-cell btime">
+        <div class="weui-cell__hd"><label class="weui-label">上次巡检时间</label></div>
+        <div class="weui-cell__bd ml">
+            <input id="f_p_patrol_tm" class="weui-input" type="date" value="" placeholder="请选择时间">
+        </div>
+    </div>
     <div class="weui-cells__title">上报信息</div>
     <div class="weui-cells weui-cells_formm btm">
         <div class="weui-cell">
