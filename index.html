@@ -1,41 +1,68 @@
 <!DOCTYPE html>
-</html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport"
-          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-    <title>测试h5</title>
-    <!--[if lt IE 9]>
-    <script src="lib/html5shiv/html5shiv.min.js"></script>
-    <script src="lib/respond/respond.min.js"></script>
-    <![endif]-->
+    <title>联系人列表页面</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link type="text/css" rel="stylesheet" href="./css/weui.css">
+    <link type="text/css" rel="stylesheet" href="./css/jquery-weui.css">
+    <link type="text/css" rel="stylesheet" href="./css/demo.css">
+    <link type="text/css" rel="stylesheet" href="./css/contact.css">
+
+    <style type="text/css">
+        .weui-media-box__desc {
+            -webkit-line-clamp: unset;
+        }
+        .weui-cell_select .weui-cell__bd:after {
+            content: unset;
+        }
+    </style>
+
 </head>
-<body>
-<p id="demo">点击按钮，获取当前经纬度</p>
-<button onclick="getLocation()">试一试</button>
 
-<br>
-<br>
-<br>
-<a href="./upload.html">上传个人资料</a>
+<body ontouchstart>
+<div class="weui-cells weui-cells_form" style="margin-top:0px;">
+    <div class="weui-cell weui-cell_vcode">
+        <div class="weui-cell__hd">
+            <label class="weui-label">姓名</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="cname" value="" placeholder="请输入姓名">
+        </div>
+        <div class="weui-cell__ft">
+            <button class="weui-vcode-btn" id="btnSearch">查询</button>
+        </div>
+    </div>
+</div>
 
-<script>
-    var x = document.getElementById("demo");
+<div class="page__bd" style="padding:0 0 55px 0;">
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__bd" id="resultlist">
 
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        }
-        else {
-            x.innerHTML = "该浏览器不支持获取地理位置。";
-        }
-    }
+        </div>
+    </div>
+    <div class="weui-loadmore">
+        <i class="weui-loading"></i>
+        <span class="weui-loadmore__tips">正在加载</span>
+    </div>
+</div>
 
-    function showPosition(position) {
-        x.innerHTML ="当前位置精度"+position.coords.accuracy+ "纬度: " + position.coords.latitude +
-            "<br>经度: " + position.coords.longitude;
-    }
-</script>
+<div class="weui-tabbar" style="position:fixed;">
+    <a href="javascript:void(0);" onclick="$('html, body').animate({scrollTop:0}, 'slow');" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="./image/top.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">回到顶部</p>
+    </a>
+</div>
+
+<script type="text/javascript" src="./js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="./js/fastclick.js"></script>
+<script type="text/javascript" src="./js/jquery-weui.js"></script>
+
+<script type="text/javascript" src="./common/conf.js"></script>
+<script type="text/javascript" src="./common/util.js"></script>
+<script type="text/javascript" src="./common/contactlist.js"></script>
 </body>
+</html>
