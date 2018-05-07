@@ -21,7 +21,7 @@ function drpRecHtml(rec) {
                         </div>
                         <div class="weui-cell__bd">
                             <p class="weui-media-box__desc">
-                              <a style="color: gray;" href=" ">${rec.myPhone ? rec.myPhone : '--'}</a >
+                              <a style="color: gray;" href="tel:${rec.myPhone}">${rec.myPhone ? rec.myPhone : '--'}</a >
                             </p >
                         </div>
                     </div>
