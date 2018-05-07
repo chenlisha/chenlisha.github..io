@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>巡检列表</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <link type="text/css" rel="stylesheet" href="./css/weui.css">
+    <!--<link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.css">-->
+    <link type="text/css" rel="stylesheet" href="./css/jquery-weui.css">
+    <link type="text/css" rel="stylesheet" href="./css/demo.css">
+
+    <style>
+        .weui-media-box__desc {
+            -webkit-line-clamp: unset;
+        }
+    </style>
+
+</head>
+
+<body ontouchstart>
+<div class="weui-cells weui-cells_form" style="margin-top:0px;">
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label" style="width: 90px;">起始日期</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="date" id="s_tm" value="">
+        </div>
+    </div>
+    <div class="weui-cell" style="padding: 0px 15px;">
+        <div class="weui-cell__hd"><label class="weui-label" style="width: 90px;">结束日期</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="date" id="e_tm" value="">
+        </div>
+        <div class="weui-cell__ft">
+            <button class="weui-vcode-btn" id="btnSearch" style="width: 60px;">查询</button>
+        </div>
+    </div>
+</div>
+
+<div class="page__bd" style="padding:0 0 55px 0;">
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__bd" id="resultlist">
+
+        </div>
+    </div>
+    <div class="weui-loadmore">
+        <i class="weui-loading"></i>
+        <span class="weui-loadmore__tips">正在加载</span>
+    </div>
+</div>
+
+<div class="weui-tabbar" style="position:fixed;">
+    <a href="./index.html" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="./image/add.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">添加</p>
+    </a>
+    <a href="javascript:void(0);" onclick="$('html, body').animate({scrollTop:0}, 'slow');" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="./image/top.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">回到顶部</p>
+    </a>
+</div>
+
+<script src="./js/jquery-2.1.4.js"></script>
+<script src="./js/fastclick.js"></script>
+<script src="./js/jquery-weui.js"></script>
+
+<script src="./common/conf.js"></script>
+<script src="./common/util.js"></script>
+<script src="./common/list.js"></script>
+</body>
+
+</html>

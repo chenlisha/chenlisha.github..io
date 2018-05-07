@@ -11,16 +11,16 @@
                 date = new Date(strdate.replace(/-/g, '/'));
             }
         }
-        const yyyy = `${date.getFullYear()}`;
-        let MM = `${date.getMonth() + 1}`;
+        const yyyy = date.getFullYear();
+        var MM = date.getMonth() + 1;
         if (MM.length === 1) { MM = '0' + MM };
-        let dd = `${date.getDate()}`;
+        var dd = date.getDate();
         if (dd.length === 1) { dd = '0' + dd };
-        let hh = `${date.getHours()}`;
+        var hh = date.getHours();
         if (hh.length === 1) { hh = '0' + hh };
-        let mm = `${date.getMinutes()}`;
+        var mm = date.getMinutes();
         if (mm.length === 1) { mm = '0' + mm };
-        let ss = `${date.getSeconds()}`;
+        var ss = date.getSeconds();
         if (ss.length === 1) { ss = '0' + dd };
 
         return fmt.replace('yyyy', yyyy).replace('MM', MM).replace('dd', dd).replace('hh', hh).replace('mm', mm).replace('ss', ss);
@@ -114,7 +114,7 @@
         }
     }
 
-    window.G = {
+    window._cutil = {
         formatDate,
         fontColorByDrp,
         QueryString,
