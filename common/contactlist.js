@@ -1,6 +1,10 @@
 let loading = false; // 判断是否加载完毕  false:加载中 ture:加载完毕
 let pageNumber = 1; // 当前页码数
 let lastpage = false; // 是否最后一页
+const ROOT_SERVICE = 'http://192.168.1.119:9002/gxhyqyh';
+// 联系人模块
+CONTACT_LIST = `${ROOT_SERVICE}/wxContacts/queryAllWxContacts`; // 联系人模块
+CONTACT_LISTNAME = `${ROOT_SERVICE}/wxContacts/queryWxContactsByName`; // 联系人模块
 
 function drpRecHtml(rec) {
     const num = rec.myPhone && Number.parseInt(rec.myPhone) !== NaN && rec.myPhone.length === 11 ? rec.myPhone[10] : 0;
