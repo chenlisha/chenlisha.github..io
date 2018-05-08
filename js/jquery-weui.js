@@ -1,6 +1,6 @@
 /**
  * jQuery WeUI V1.2.0
- * By 瑷€宸�
+ * By 言川
  * http://lihongxun945.github.io/jquery-weui/
  */
 /* global $:true */
@@ -2934,8 +2934,8 @@
                 // 3.   allow if the recognizer is allowed to run simultaneous with the current recognized recognizer.
                 //      this can be setup with the `recognizeWith()` method on the recognizer.
                 if (session.stopped !== FORCED_STOP && ( // 1
-                        !curRecognizer || recognizer == curRecognizer || // 2
-                        recognizer.canRecognizeWith(curRecognizer))) { // 3
+                    !curRecognizer || recognizer == curRecognizer || // 2
+                    recognizer.canRecognizeWith(curRecognizer))) { // 3
                     recognizer.recognize(inputData);
                 } else {
                     recognizer.reset();
@@ -3239,7 +3239,7 @@
         dialog.find(".weui-dialog__btn").each(function(i, e) {
             var el = $(e);
             el.click(function() {
-                //鍏堝叧闂璇濇锛屽啀璋冪敤鍥炶皟鍑芥暟
+                //先关闭对话框，再调用回调函数
                 if(params.autoClose) $.closeModal();
 
                 if(buttons[i].onClick) {
@@ -3342,7 +3342,7 @@
         });
     };
 
-    //濡傛灉鍙傛暟杩囧锛屽缓璁€氳繃 config 瀵硅薄杩涜閰嶇疆锛岃€屼笉鏄紶鍏ュ涓弬鏁般€�
+    //如果参数过多，建议通过 config 对象进行配置，而不是传入多个参数。
     $.prompt = function(text, title, onOK, onCancel, input) {
         var config;
         if (typeof text === 'object') {
@@ -3397,7 +3397,7 @@
         return modal;
     };
 
-    //濡傛灉鍙傛暟杩囧锛屽缓璁€氳繃 config 瀵硅薄杩涜閰嶇疆锛岃€屼笉鏄紶鍏ュ涓弬鏁般€�
+    //如果参数过多，建议通过 config 对象进行配置，而不是传入多个参数。
     $.login = function(text, title, onOK, onCancel, username, password) {
         var config;
         if (typeof text === 'object') {
@@ -3422,8 +3422,8 @@
 
         var modal = $.modal({
             text: '<p class="weui-prompt-text">'+(config.text || '')+'</p>' +
-            '<input type="text" class="weui-input weui-prompt-input" id="weui-prompt-username" value="' + (config.username || '') + '" placeholder="杈撳叆鐢ㄦ埛鍚�" />' +
-            '<input type="password" class="weui-input weui-prompt-input" id="weui-prompt-password" value="' + (config.password || '') + '" placeholder="杈撳叆瀵嗙爜" />',
+            '<input type="text" class="weui-input weui-prompt-input" id="weui-prompt-username" value="' + (config.username || '') + '" placeholder="输入用户名" />' +
+            '<input type="password" class="weui-input weui-prompt-input" id="weui-prompt-password" value="' + (config.password || '') + '" placeholder="输入密码" />',
             title: config.title,
             autoClose: false,
             buttons: [
@@ -3460,15 +3460,15 @@
     };
 
     defaults = $.modal.prototype.defaults = {
-        title: "鎻愮ず",
+        title: "提示",
         text: undefined,
-        buttonOK: "纭畾",
-        buttonCancel: "鍙栨秷",
+        buttonOK: "确定",
+        buttonCancel: "取消",
         buttons: [{
-            text: "纭畾",
+            text: "确定",
             className: "primary"
         }],
-        autoClose: true //鐐瑰嚮鎸夐挳鑷姩鍏抽棴瀵硅瘽妗嗭紝濡傛灉浣犱笉甯屾湜鐐瑰嚮鎸夐挳灏卞叧闂璇濇锛屽彲浠ユ妸杩欎釜璁剧疆涓篺alse
+        autoClose: true //点击按钮自动关闭对话框，如果你不希望点击按钮就关闭对话框，可以把这个设置为false
     };
 
 }($);
@@ -3515,7 +3515,7 @@
         } else if(typeof style === typeof 1) {
             duration = style
         }
-        show('<i class="' + iconClassName + ' weui-icon_toast"></i><p class="weui-toast_content">' + (text || "宸茬粡瀹屾垚") + '</p>', className);
+        show('<i class="' + iconClassName + ' weui-icon_toast"></i><p class="weui-toast_content">' + (text || "已经完成") + '</p>', className);
 
         setTimeout(function() {
             hide(callback);
@@ -3526,7 +3526,7 @@
         var html = '<div class="weui_loading">';
         html += '<i class="weui-loading weui-icon_toast"></i>';
         html += '</div>';
-        html += '<p class="weui-toast_content">' + (text || "鏁版嵁鍔犺浇涓�") + '</p>';
+        html += '<p class="weui-toast_content">' + (text || "数据加载中") + '</p>';
         show(html, 'weui_loading_toast');
     }
 
@@ -3567,7 +3567,7 @@
             actionsHtml +
             '</div>'+
             '<div class="weui-actionsheet__action">'+
-            '<div class="weui-actionsheet__cell weui-actionsheet_cancel">鍙栨秷</div>'+
+            '<div class="weui-actionsheet__cell weui-actionsheet_cancel">取消</div>'+
             '</div>'+
             '</div>';
         var dialog = $(tpl).appendTo(document.body);
@@ -3614,13 +3614,13 @@
         title: undefined,
         onClose: undefined,
         /*actions: [{
-      text: "鑿滃崟",
+      text: "菜单",
       className: "color-danger",
       onClick: function() {
         console.log(1);
       }
     },{
-      text: "鑿滃崟2",
+      text: "菜单2",
       className: "color-success",
       onClick: function() {
         console.log(2);
@@ -3672,7 +3672,7 @@
         var p = $.getTouchPosition(e);
         this.diffX = p.x - this.start.x;
         this.diffY = p.y - this.start.y;
-        if (Math.abs(this.diffX) > Math.abs(this.diffY)) return true; // 璇存槑鏄乏鍙虫柟鍚戠殑鎷栧姩
+        if (Math.abs(this.diffX) > Math.abs(this.diffY)) return true; // 说明是左右方向的拖动
         if(this.diffY < 0) return;
         this.container.addClass("touching");
         e.preventDefault();
@@ -4004,8 +4004,8 @@ Device/OS Detection
             scrollToInput: true,
             inputReadOnly: true,
             toolbar: true,
-            toolbarCloseText: '瀹屾垚',
-            title: '璇烽€夋嫨',
+            toolbarCloseText: '完成',
+            title: '请选择',
             toolbarTemplate: '<div class="toolbar">\
           <div class="toolbar-inner">\
           <a href="javascript:;" class="picker-button close-picker">{{closeText}}</a>\
@@ -4190,7 +4190,7 @@ Device/OS Detection
               var prevItems = selectedItem.prevAll().addClass('picker-before-selected');
               var nextItems = selectedItem.nextAll().addClass('picker-after-selected');
               */
-                //鍘绘帀 .picker-after-selected, .picker-before-selected 浠ユ彁楂樻€ц兘
+                //去掉 .picker-after-selected, .picker-before-selected 以提高性能
                 col.wrapper.find('.picker-selected').removeClass('picker-selected');
                 if (p.params.rotateEffect) {
                     col.items.transition(transition);
@@ -4595,7 +4595,7 @@ Device/OS Detection
         }
     });
 
-    //淇picker浼氭粴鍔ㄩ〉闈㈢殑bug
+    //修复picker会滚动页面的bug
     $(document).on($.touchEvents.move, ".picker-modal-inner", function(e) {
         e.preventDefault();
     });
@@ -4615,10 +4615,10 @@ Device/OS Detection
 
         container.addClass("weui-picker-container-visible");
 
-        //鍏充簬甯冨眬鐨勯棶棰橈紝濡傛灉鐩存帴鏀惧湪body涓婏紝鍒欏仛鍔ㄧ敾鐨勬椂鍊欎細鎾戝紑body楂樺害鑰屽鑷存粴鍔ㄦ潯鍙樺寲銆�
+        //关于布局的问题，如果直接放在body上，则做动画的时候会撑开body高度而导致滚动条变化。
         var dialog = $(tpl).appendTo(container);
 
-        dialog.width(); //閫氳繃鍙栦竴娆SS鍊硷紝寮哄埗娴忚鍣ㄤ笉鑳芥妸涓婁笅涓よ浠ｇ爜鍚堝苟鎵ц锛屽洜涓哄悎骞朵箣鍚庝細瀵艰嚧鏃犳硶鍑虹幇鍔ㄧ敾銆�
+        dialog.width(); //通过取一次CSS值，强制浏览器不能把上下两行代码合并执行，因为合并之后会导致无法出现动画。
 
         dialog.addClass("weui-picker-modal-visible");
 
@@ -4771,7 +4771,7 @@ Device/OS Detection
         var value = this.$input.val();
         var items = this.config.items;
 
-        //濡傛灉input涓虹┖锛屽彧鏈夊湪绗竴娆″垵濮嬪寲鐨勬椂鍊欐墠淇濈暀榛樿閫夋嫨銆傚洜涓哄悗鏉ュ氨鏄敤鎴疯嚜宸卞彇娑堜簡鍏ㄩ儴閫夋嫨锛屼笉鑳藉啀涓轰粬閫変腑榛樿鍊笺€�
+        //如果input为空，只有在第一次初始化的时候才保留默认选择。因为后来就是用户自己取消了全部选择，不能再为他选中默认值。
         if( !this._init && (value === undefined || value == null || value === "")) return;
 
         var titles = this.config.multi ? value.split(this.config.split) : [value];
@@ -4806,7 +4806,7 @@ Device/OS Detection
             });
     }
 
-    //鏇存柊鏁版嵁
+    //更新数据
     Select.prototype.update = function(config) {
         this.config = $.extend({}, this.config, config);
         this.initConfig();
@@ -4819,12 +4819,12 @@ Device/OS Detection
 
         if(this._open) return;
 
-        // open picker 浼氶粯璁ゅ叧鎺夊叾浠栫殑锛屼絾鏄� onClose 涓嶄細琚皟鐢紝鎵€浠ヨ繖閲屽厛鍏虫帀鍏朵粬select
+        // open picker 会默认关掉其他的，但是 onClose 不会被调用，所以这里先关掉其他select
         for (var i = 0; i < selects.length; i++ ) {
             var s = selects[i];
             if (s === this) continue;
             if (s._open) {
-                if(!s.close()) return false; // 鍏朵粬鐨剆elect鐢变簬鏌愪簺鏉′欢闄愬埗鍏抽棴澶辫触銆�
+                if(!s.close()) return false; // 其他的select由于某些条件限制关闭失败。
             }
         }
 
@@ -4854,11 +4854,11 @@ Device/OS Detection
             }
             if(this.config.multi) {
                 if(this.config.min !== undefined && this.data.length < this.config.min) {
-                    $.toast("璇疯嚦灏戦€夋嫨"+this.config.min+"涓�", "text");
+                    $.toast("请至少选择"+this.config.min+"个", "text");
                     return false
                 }
                 if(this.config.max !== undefined && this.data.length > this.config.max) {
-                    $.toast("鏈€澶氬彧鑳介€夋嫨"+this.config.max+"涓�", "text");
+                    $.toast("最多只能选择"+this.config.max+"个", "text");
                     return false
                 }
             }
@@ -4902,18 +4902,18 @@ Device/OS Detection
 
     defaults = $.fn.select.prototype.defaults = {
         items: [],
-        input: undefined, //杈撳叆妗嗙殑鍒濆鍊�
-        title: "璇烽€夋嫨",
+        input: undefined, //输入框的初始值
+        title: "请选择",
         multi: false,
-        closeText: "纭畾",
-        autoClose: true, //鏄惁閫夋嫨瀹屾垚鍚庤嚜鍔ㄥ叧闂紝鍙湁鍗曢€夋ā寮忎笅鎵嶆湁鏁�
+        closeText: "确定",
+        autoClose: true, //是否选择完成后自动关闭，只有单选模式下才有效
         onChange: undefined, //function
-        beforeClose: undefined, // function 鍏抽棴涔嬪墠锛屽鏋滆繑鍥瀎alse鍒欓樆姝㈠叧闂�
+        beforeClose: undefined, // function 关闭之前，如果返回false则阻止关闭
         onClose: undefined, //function
         onOpen: undefined, //function
-        split: ",",  //澶氶€夋ā寮忎笅鐨勫垎闅旂
-        min: undefined, //澶氶€夋ā寮忎笅鍙敤锛屾渶灏戦€夋嫨鏁�
-        max: undefined, //鍗曢€夋ā寮忎笅鍙敤锛屾渶澶氶€夋嫨鏁�
+        split: ",",  //多选模式下的分隔符
+        min: undefined, //多选模式下可用，最少选择数
+        max: undefined, //单选模式下可用，最多选择数
         toolbarTemplate: '<div class="toolbar">\
       <div class="toolbar-inner">\
       <a href="javascript:;" class="picker-button close-select">{{closeText}}</a>\
@@ -5640,7 +5640,7 @@ Device/OS Detection
 
         }
 
-        //iphone 涓婃棤娉曟纭Е鍙� click锛屼細瀵艰嚧鐐瑰嚮澶栭潰鏃犳硶鍏抽棴
+        //iphone 上无法正确触发 click，会导致点击外面无法关闭
         if (!p.inline) $(document).on('click touchend', closeOnHTMLClick);
 
         // Open
@@ -5727,7 +5727,7 @@ Device/OS Detection
         // Close
         p.close = function () {
             if (!p.opened || p.inline) return;
-            p.animating = false;  //鏈夊彲鑳借繕鏈夊姩鐢绘病鍋氬畬锛屽洜姝nimating璁剧疆杩樻病鏀广€�
+            p.animating = false;  //有可能还有动画没做完，因此animating设置还没改。
             if (inPopover()) {
                 $.closePicker(p.popover);
                 return;
@@ -5778,7 +5778,7 @@ Device/OS Detection
                 if(typeof params === typeof "a") {
                 } else {
                     if(!params.value && $this.val()) params.value = [$this.val()];
-                    //榛樿鏄剧ず浠婂ぉ
+                    //默认显示今天
                     if(!params.value) {
                         var today = new Date();
                         params.value = [today.getFullYear() + "/" + format(today.getMonth() + 1) + "/" + format(today.getDate())];
@@ -5794,11 +5794,11 @@ Device/OS Detection
     };
 
     defaults = $.fn.calendar.prototype.defaults = {
-        value: undefined, // 閫氳繃JS璧嬪€硷紝娉ㄦ剰鏄暟缁�
-        monthNames: ['涓€鏈�', '浜屾湀', '涓夋湀', '鍥涙湀', '浜旀湀', '鍏湀', '涓冩湀', '鍏湀', '涔濇湀', '鍗佹湀', '鍗佷竴鏈�', '鍗佷簩鏈�'],
-        monthNamesShort: ['涓€鏈�', '浜屾湀', '涓夋湀', '鍥涙湀', '浜旀湀', '鍏湀', '涓冩湀', '鍏湀', '涔濇湀', '鍗佹湀', '鍗佷竴鏈�', '鍗佷簩鏈�'],
-        dayNames: ['鍛ㄦ棩', '鍛ㄤ竴', '鍛ㄤ簩', '鍛ㄤ笁', '鍛ㄥ洓', '鍛ㄤ簲', '鍛ㄥ叚'],
-        dayNamesShort: ['鍛ㄦ棩', '鍛ㄤ竴', '鍛ㄤ簩', '鍛ㄤ笁', '鍛ㄥ洓', '鍛ㄤ簲', '鍛ㄥ叚'],
+        value: undefined, // 通过JS赋值，注意是数组
+        monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+        monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+        dayNames: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+        dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
         firstDay: 1, // First day of the week, Monday
         weekendDays: [0, 6], // Sunday and Saturday
         multiple: false,
@@ -5898,7 +5898,7 @@ Device/OS Detection
                 lastValidValues;
 
             var config = {
-                rotateEffect: false,  //涓轰簡鎬ц兘
+                rotateEffect: false,  //为了性能
                 cssClass: 'datetime-picker',
 
                 value: [today.getFullYear(), formatNumber(today.getMonth()+1), formatNumber(today.getDate()), formatNumber(today.getHours()), (formatNumber(today.getMinutes()))],
@@ -5945,14 +5945,14 @@ Device/OS Detection
                         values: this.initYears
                     },
                     {
-                        divider: true,  // 杩欐槸涓€涓垎闅旂
+                        divider: true,  // 这是一个分隔符
                         content: params.yearSplit
                     },
                     {
                         values: this.initMonthes
                     },
                     {
-                        divider: true,  // 杩欐槸涓€涓垎闅旂
+                        divider: true,  // 这是一个分隔符
                         content: params.monthSplit
                     },
                     {
@@ -6006,13 +6006,13 @@ Device/OS Detection
     };
 
     defaults = $.fn.datetimePicker.prototype.defaults = {
-        input: undefined, // 榛樿鍊�
-        min: undefined, // YYYY-MM-DD 鏈€澶ф渶灏忓€煎彧姣旇緝骞存湀鏃ワ紝涓嶆瘮杈冩椂鍒嗙
+        input: undefined, // 默认值
+        min: undefined, // YYYY-MM-DD 最大最小值只比较年月日，不比较时分秒
         max: undefined,  // YYYY-MM-DD
         yearSplit: '-',
         monthSplit: '-',
-        dateSplit: '',  // 榛樿涓虹┖
-        datetimeSplit: ' ',  // 鏃ユ湡鍜屾椂闂翠箣闂寸殑鍒嗛殧绗︼紝涓嶅彲涓虹┖
+        dateSplit: '',  // 默认为空
+        datetimeSplit: ' ',  // 日期和时间之间的分隔符，不可为空
         monthes: ('01 02 03 04 05 06 07 08 09 10 11 12').split(' '),
         years: (function () {
             var arr = [];
@@ -6020,7 +6020,7 @@ Device/OS Detection
             return arr;
         })(),
         times: function () {
-            return [  // 鑷畾涔夌殑鏃堕棿
+            return [  // 自定义的时间
                 {
                     values: (function () {
                         var hours = [];
@@ -6029,7 +6029,7 @@ Device/OS Detection
                     })()
                 },
                 {
-                    divider: true,  // 杩欐槸涓€涓垎闅旂
+                    divider: true,  // 这是一个分隔符
                     content: ':'
                 },
                 {
@@ -6041,17 +6041,17 @@ Device/OS Detection
                 }
             ];
         },
-        format: function (p, values) { // 鏁扮粍杞崲鎴愬瓧绗︿覆
+        format: function (p, values) { // 数组转换成字符串
             return p.cols.map(function (col) {
                 return col.value || col.content;
             }).join('');
         },
         parse: function (str) {
-            // 鎶婂瓧绗︿覆杞崲鎴愭暟缁勶紝鐢ㄦ潵瑙ｆ瀽鍒濆鍊�
-            // 濡傛灉浣犵殑瀹氬埗鐨勫垵濮嬪€兼牸寮忔棤娉曡杩欎釜榛樿鍑芥暟瑙ｆ瀽锛岃鑷畾涔夎繖涓嚱鏁般€傛瘮濡備綘鐨勬椂闂存槸 '瀛愭椂' 閭ｄ箞榛樿鎯呭喌杩欎釜'鏃�'浼氳褰撳仛鍒嗛殧绗﹁€屽鑷撮敊璇紝鎵€浠ヤ綘闇€瑕佽嚜宸卞畾涔塸arse鍑芥暟
-            // 榛樿鍏煎鐨勫垎闅旂
+            // 把字符串转换成数组，用来解析初始值
+            // 如果你的定制的初始值格式无法被这个默认函数解析，请自定义这个函数。比如你的时间是 '子时' 那么默认情况这个'时'会被当做分隔符而导致错误，所以你需要自己定义parse函数
+            // 默认兼容的分隔符
             var t = str.split(this.datetimeSplit);
-            return t[0].split(/\D/).concat(t[1].split(/:|鏃秥鍒唡绉�/)).filter(function (d) {
+            return t[0].split(/\D/).concat(t[1].split(/:|时|分|秒/)).filter(function (d) {
                 return !!d;
             })
         }
@@ -6068,7 +6068,7 @@ Device/OS Detection
     "use strict";
 
 
-    //Popup 鍜� picker 涔嬬被鐨勪笉瑕佸叡鐢ㄤ竴涓脊鍑烘柟娉曪紝鍥犱负杩欐牱浼氬鑷� 鍦� popup 涓啀寮瑰嚭 picker 鐨勬椂鍊欎細鏈夐棶棰樸€�
+    //Popup 和 picker 之类的不要共用一个弹出方法，因为这样会导致 在 popup 中再弹出 picker 的时候会有问题。
 
     $.openPopup = function(popup, className) {
 
@@ -6357,7 +6357,7 @@ Device/OS Detection
         if (transform && transform.length) this.startX = parseInt(transform[4])
         this.diffX = this.diffY = 0;
         this._closeOthers()
-        this.limit = this.container.find('>.weui-cell__ft').width() || 68; // 鍥犱负鏈夌殑鏃跺€欏垵濮嬪寲鐨勬椂鍊欏厓绱犳槸闅愯棌鐨勶紙姣斿鍦ㄥ璇濇鍐咃級锛屾墍浠ュ湪touchstart鐨勬椂鍊欒绠楀搴﹁€屼笉鏄垵濮嬪寲鐨勬椂鍊�
+        this.limit = this.container.find('>.weui-cell__ft').width() || 68; // 因为有的时候初始化的时候元素是隐藏的（比如在对话框内），所以在touchstart的时候计算宽度而不是初始化的时候
     };
 
     Swipeout.prototype.touchMove= function(e) {
@@ -6365,7 +6365,7 @@ Device/OS Detection
         var p = $.getTouchPosition(e);
         this.diffX = p.x - this.start.x;
         this.diffY = p.y - this.start.y;
-        if (Math.abs(this.diffX) < Math.abs(this.diffY)) { // 璇存槑鏄笂涓嬫柟鍚戝湪鎷栧姩
+        if (Math.abs(this.diffX) < Math.abs(this.diffY)) { // 说明是上下方向在拖动
             this.close()
             this.start = false
             return true;
@@ -6382,9 +6382,9 @@ Device/OS Detection
         this.start = false;
         var x = this.diffX + this.startX
         var t = new Date - this.startTime;
-        if (this.diffX < -5 && t < 200) { // 鍚戝乏蹇€熸粦鍔紝鍒欐墦寮€
+        if (this.diffX < -5 && t < 200) { // 向左快速滑动，则打开
             this.open()
-        } else if (this.diffX >= 0 && t < 200) { // 鍚戝彸蹇€熸粦鍔紝鎴栬€呭崟鍑�,鍒欏叧闂�
+        } else if (this.diffX >= 0 && t < 200) { // 向右快速滑动，或者单击,则关闭
             this.close()
         } else if (x > 0 || -x <= this.limit / 2) {
             this.close()

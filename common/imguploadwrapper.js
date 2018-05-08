@@ -65,7 +65,7 @@ function ImageUploader(options) {
             imgFiles[fileObjName] = file;
 
             const $picDiv = $(`<li class="weui-uploader__file" style="background-image: url('${URL.createObjectURL(file)}')">
-                <div><img src="../../image/shanchu.png" class="del_${fileObjName}" style="width: 24px; height: 24px; float: right; background: #ccc"/></div></li>`);
+                <div><img src="./image/shanchu.png" class="del_${fileObjName}" style="width: 24px; height: 24px; float: right; background: #ccc"/></div></li>`);
             $('#uploaderFiles').append($picDiv);
 
             if (fnUpload) {
