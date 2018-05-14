@@ -26,7 +26,6 @@
         return fmt.replace('yyyy', yyyy).replace('MM', MM).replace('dd', dd).replace('hh', hh).replace('mm', mm).replace('ss', ss);
     }
 
-
     function fontColorByDrp(drp) {
         if (drp < 10) {
             return 'rgb(84, 195, 84)';
@@ -69,7 +68,6 @@
             return v.toString(16);
         });
     }
-
     function wxlogin(loginUrl, moduleName, code, cb) {
         var theUserObj = {};
         try {

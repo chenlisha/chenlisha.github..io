@@ -1,8 +1,7 @@
 function ImageUploader(options) {
     options = options || {};
-
     const allowTypes = options.allowTypes || ['image/jpg', 'image/jpeg', 'image/png'];
-    const maxSize = options.maxSize || 2048 * 2048;
+    const maxSize = options.maxSize || 1024 * 1024 * 10;
     const maxWidth = options.maxWidth || 2000;
     const maxCount = options.maxCount || 10;
     const selector = options.selector || '#uploaderInput';
@@ -34,17 +33,17 @@ function ImageUploader(options) {
         return ret;
     }
 
-    $(selector).on('change', function(event) {
+    $(selector).on('change', function (event) {
         let files = event.target.files;
         if (files.length === 0) {
             return;
         }
 
         let curCount = getFileCount();
-        if (curCount + files.length > maxCount){
-            $.alert('最多只能上传' + maxCount + '张图片',"警告！");
+        if (curCount + files.length > maxCount) {
+            $.alert('最多只能上传' + maxCount + '张图片', "警告！");
             const _files = [];
-            for (let i = curCount; i < maxCount; i += 1){
+            for (let i = curCount; i < maxCount; i += 1) {
                 _files[i] = files[i];
             }
             files = _files;
@@ -74,7 +73,7 @@ function ImageUploader(options) {
 
             $picDiv.on('click', `.del_${fileObjName}`, function () {
                 let thisDiv = this;
-                $.confirm("您确定要删除吗?", "确认删除?", function() {
+                $.confirm("您确定要删除吗?", "确认删除?", function () {
                     delete imgFiles[fileObjName];
                     $(thisDiv).parents('li').remove();
                     if (fnDelete) {

@@ -23,8 +23,8 @@
         .weui-cells:after{
             border-bottom: 0;
         }
-        .btm:after{
-            border-bottom: 1px solid #e5e5e5;
+        .btm{
+            margin-bottom: 1px;
         }
         .btime{
             border-bottom: 1px solid #e5e5e5;
@@ -74,7 +74,7 @@
             <label class="weui-label">巡检人姓名</label>
         </div>
         <div class="weui-cell__bd">
-            <input id="f_patrol_user" class="weui-input" type="text" placeholder="请输入姓名">
+            <input id="f_patrol_user" class="weui-input" type="text" placeholder="请输入巡检人姓名">
         </div>
     </div>
     <div class="weui-cell">
@@ -82,70 +82,59 @@
             <label class="weui-label">巡检测站</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="f_device_id" type="text" value="" placeholder="请选择测站">
+            <input class="weui-input" id="f_device_id" type="text" value="" placeholder="请输入巡检测站">
         </div>
     </div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">经纬度</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" id="f_ll" type="text" value="" placeholder="经度,维度">
-        </div>
-        <div class="weui-cell__ft">
-            <button class="weui-vcode-btn" id="btnPosition">定位</button>
-        </div>
-    </div>
+
     <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">巡检次数</label></div>
         <div class="weui-cell__bd">
-            <input id="f_patrol_size" class="weui-input" type="number" placeholder="请输入次数">
+            <input id="f_patrol_size" class="weui-input" type="number" readonly placeholder="--">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">上次巡检时间</label></div>
+        <div class="weui-cell__bd">
+            <input id="f_p_patrol_tm" class="weui-input" type="date" readonly value="">
         </div>
     </div>
     <div class="weui-cell btime">
-        <div class="weui-cell__hd"><label class="weui-label">上次巡检时间</label></div>
-        <div class="weui-cell__bd ml">
-            <input id="f_p_patrol_tm" class="weui-input" type="date" value="" placeholder="请选择时间">
+        <div class="weui-cell__hd">
+            <label class="weui-label">当前经纬度</label>
         </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="f_ll" readonly type="text" value="" placeholder="经度,维度">
+        </div>
+        <!--<div class="weui-cell__ft">-->
+        <!--<button class="weui-vcode-btn" id="btnPosition">定位</button>-->
+        <!--</div>-->
     </div>
     <div class="weui-cells__title">上报信息</div>
-    <div class="weui-cells weui-cells_formm btm">
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <textarea id="f_patrol_content" class="weui-textarea" placeholder="请填写上报内容" rows="3"></textarea>
-            </div>
-        </div>
-    </div>
-    <div class="weui-cells__title">图片上传</div>
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
             <div class="weui-cell__bd">
-                <ul class="weui-uploader__files" id="uploaderFiles">
-                </ul>
-                <div class="weui-uploader__input-box">
-                    <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*">
-                </div>
+                <textarea id="f_patrol_content" class="weui-textarea" placeholder="请填写巡检内容" rows="3"></textarea>
             </div>
         </div>
     </div>
 
-    <!--<div class="weui-cell">-->
-        <!--<div class="weui-cell__bd">-->
-            <!--<div class="weui-uploader">-->
-                <!--<div class="weui-uploader__hd">-->
-                    <!--<p class="weui-uploader__title">图片上传</p>-->
-                    <!--<div class="weui-uploader__info">0/5</div>-->
-                <!--</div>-->
-                <!--<div class="weui-uploader__bd">-->
-                    <!--<ul class="weui-uploader__files" id="uploaderFiles">-->
-                    <!--</ul>-->
-                    <!--<div class="weui-uploader__input-box">-->
-                        <!--<input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*">-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd btm">
+                    <p class="weui-uploader__title">图片上传</p>
+                    <div class="weui-uploader__info">0/10</div>
+                </div>
+                <div class="weui-uploader__bd">
+                    <ul class="weui-uploader__files" id="uploaderFiles">
+                    </ul>
+                    <div class="weui-uploader__input-box">
+                        <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="weui-btn-area">
         <a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="showTooltips">确定</a>
     </div>
@@ -171,6 +160,10 @@
 <script src="./common/conf.js"></script>
 <script src="./common/util.js"></script>
 <script src="./common/add.js"></script>
+<script>
+
+
+</script>
 </body>
 
 </html>

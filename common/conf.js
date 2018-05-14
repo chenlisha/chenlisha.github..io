@@ -1,12 +1,13 @@
 // const ROOT_SERVICE = 'http://localhost:8080';
 // const ROOT_SERVICE = 'http://pixii.tunnel.qydev.com';
 const ROOT_SERVICE = 'http://jjwxtest.cloudowr.cn';
+// const ROOT_SERVICE = 'http://192.168.1.119:9007/GxhyAgreement';
 
 const _debug = "";
 
 if (_debug) {
-    DEBUG_USER = 'ZhouZheDi';
-    DEBUG_UID = '891718f71cb9459e93c18771a51cf958';
+    DEBUG_USER = 'wjhclwz121411';
+    DEBUG_UID = '0574ea0be547458bb5aeb476be04e85c';
 } else {
     DEBUG_USER = '';
     DEBUG_UID = '';

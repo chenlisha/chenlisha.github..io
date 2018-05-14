@@ -1,6 +1,7 @@
+initLocation();
 const qs = _cutil.QueryString();
 
-// 是否正在上传提交什么
+// 是否正在上传提交
 var submitting = false;
 
 var formObject = {
@@ -15,7 +16,6 @@ var formObject = {
 };
 
 var theUserObj = null;
-
 
 function initLocation() {
     var geolocation = new BMap.Geolocation();
@@ -37,7 +37,6 @@ function initLocation() {
         enableHighAccuracy: true
     });
 }
-
 function _initStSelection() {
     $.ajax({
         url: ROOT_SERVICE + '/patrol/stlist',
@@ -51,7 +50,7 @@ function _initStSelection() {
         }
         $("#f_device_id").select({
             title: "请选择测站",
-            items: data.map(function(rec) {
+            items: data.map(function (rec) {
                 return {
                     title: rec.stnm,
                     value: rec.stcd
@@ -62,10 +61,8 @@ function _initStSelection() {
         $.toptip('测站信息获取失败');
     })
 }
-
-$(function() {
+$(function () {
     FastClick.attach(document.body);
-
     _cutil.wxlogin(PATROL_LOGIN, "patrol", qs.code, function (userObj) {
         theUserObj = userObj;
 
@@ -77,12 +74,9 @@ $(function() {
         _initStSelection();
     });
 
-    // initLocation();
-    $('#btnPosition').click(initLocation);
-
     var imgUploader = new ImageUploader();
 
-    $("#showTooltips").click(function() {
+    $("#showTooltips").click(function () {
         if (submitting) {
             return;
         }
@@ -91,9 +85,9 @@ $(function() {
             $.toptip('请输入巡检人姓名');
             return;
         }
-        formObject.device_id = $('#f_device_id').attr('data-values');
+        formObject.device_id = $('#f_device_id').val().trim()
         if (!formObject.device_id) {
-            $.toptip('请选择巡检测站');
+            $.toptip('请输入巡检测站');
             return;
         }
         formObject.patrol_content = $('#f_patrol_content').val().trim();
@@ -103,7 +97,6 @@ $(function() {
         }
         formObject.p_patrol_tm = $('#f_p_patrol_tm').val();
         formObject.patrol_size = $('#f_patrol_size').val();
-
         let formData = new FormData();
         for (var key in formObject) {
             formData.append(key, formObject[key]);
@@ -125,7 +118,9 @@ $(function() {
             submitting = false;
             $.hideLoading();
             if (data.result) {
-                $.toast("操作成功", function() { location.reload(); });
+                $.toast("操作成功", function () {
+                    location.reload();
+                });
             } else {
                 $.toptip('提交失败');
             }
@@ -136,3 +131,4 @@ $(function() {
         });
     });
 });
+
