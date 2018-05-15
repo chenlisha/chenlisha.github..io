@@ -56,7 +56,6 @@ function _initStSelection() {
 }
 
 function upload(files) {
-    debugger
     var fileReader = new FileReader()
     var blobSlice = File.prototype.mozSlice || File.prototype.webkitSlice || File.prototype.slice;
     var file = files.file;
@@ -75,6 +74,8 @@ function upload(files) {
         //如果文件处理完成计算MD5，如果还有分片继续处理
         if (currentChunk < chunks) {
             loadNext();
+        }else {
+            console.info("计算的Hash", spark.end());
         }
     };
 
@@ -133,7 +134,6 @@ $(function () {
             var imgfile = imgfiles[i]
             upload(imgfile)
         }
-        return
         submitting = true;
         $.showLoading('提交中，请等待');
         $.ajax({
