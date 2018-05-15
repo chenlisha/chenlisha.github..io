@@ -16,6 +16,7 @@ function ImageUploader(options) {
             if (imgFiles.hasOwnProperty(key) && imgFiles[key]) {
                 count += 1;
             }
+
         }
         return count;
     }
@@ -76,6 +77,7 @@ function ImageUploader(options) {
                 $.confirm("您确定要删除吗?", "确认删除?", function () {
                     delete imgFiles[fileObjName];
                     $(thisDiv).parents('li').remove();
+                    $('.weui-uploader__info').text(`${getFileCount()}/${maxCount}`);
                     if (fnDelete) {
                         fnDelete(fileObjName);
                     }

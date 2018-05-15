@@ -1,7 +1,7 @@
 // const ROOT_SERVICE = 'http://localhost:8080';
 // const ROOT_SERVICE = 'http://pixii.tunnel.qydev.com';
-const ROOT_SERVICE = 'http://jjwxtest.cloudowr.cn';
-// const ROOT_SERVICE = 'http://192.168.1.119:9007/GxhyAgreement';
+// const ROOT_SERVICE = 'http://jjwxtest.cloudowr.cn';
+const ROOT_SERVICE = 'http://192.168.1.119:9007/GxhyAgreement';
 
 const _debug = "";
 
@@ -43,5 +43,5 @@ PATROL_LOGIN = `${ROOT_SERVICE}/patrol/login${_debug}`;
 // 召测
 MEASURE_sendDataProtocol = `${ROOT_SERVICE}/temp/sendDataProtocol`;
 MEASURE_getReturnResult = `${ROOT_SERVICE}/temp/getReturnResult`;
-// MEASURE_getImage = '../../image/test/101.png';
+
 MEASURE_getImage = 'http://221.222.240.73:8181/GxhyAgreement/communication/getImage';

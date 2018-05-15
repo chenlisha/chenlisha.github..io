@@ -19,17 +19,9 @@ var theUserObj = null;
 
 function initLocation() {
     var geolocation = new BMap.Geolocation();
-
     geolocation.getCurrentPosition(function (r) {
         if (this.getStatus() == BMAP_STATUS_SUCCESS) {
             $("#f_ll").val(`${r.point.lng.toFixed(6)},${r.point.lat.toFixed(6)}`);
-            /*
-            var geoc = new BMap.Geocoder();
-            geoc.getLocation(r.point, function(rs){
-                var addComp = rs.addressComponents;
-                $("#address").val(addComp.city + addComp.district + addComp.street + addComp.streetNumber);
-            });
-            */
         } else {
             $.toptip('获取经纬度失败:' + this.getStatus());
         }
@@ -37,6 +29,7 @@ function initLocation() {
         enableHighAccuracy: true
     });
 }
+
 function _initStSelection() {
     $.ajax({
         url: ROOT_SERVICE + '/patrol/stlist',
@@ -61,18 +54,49 @@ function _initStSelection() {
         $.toptip('测站信息获取失败');
     })
 }
+
+function upload(files) {
+    debugger
+    var fileReader = new FileReader()
+    var blobSlice = File.prototype.mozSlice || File.prototype.webkitSlice || File.prototype.slice;
+    var file = files.file;
+    //文件每块分割2M，计算分割详情
+    var chunkSize = 10 * 1024,
+        chunks = Math.ceil(file.size / chunkSize),
+        currentChunk = 0,
+        //创建md5对象（基于SparkMD5）
+        spark = new SparkMD5();
+    //每块文件读取完毕之后的处理
+    fileReader.onload = function (e) {
+        console.log("读取文件", currentChunk + 1, "/", chunks);
+        //每块交由sparkMD5进行计算
+        spark.appendBinary(e.target.result);
+        currentChunk++;
+        //如果文件处理完成计算MD5，如果还有分片继续处理
+        if (currentChunk < chunks) {
+            loadNext();
+        }
+    };
+
+    //处理单片文件的上传
+    function loadNext() {
+        var start = currentChunk * chunkSize, end = start + chunkSize >= file.size ? file.size : start + chunkSize;
+        fileReader.readAsBinaryString(blobSlice.call(file, start, end));
+    }
+    loadNext();
+}
+
 $(function () {
     FastClick.attach(document.body);
     _cutil.wxlogin(PATROL_LOGIN, "patrol", qs.code, function (userObj) {
         theUserObj = userObj;
-
         if (userObj) {
             $("#f_patrol_user").val(userObj.theUname);
             formObject.patrol_userid = userObj.theUser;
         }
-
         _initStSelection();
     });
+    $('#btnPosition').click(initLocation);
 
     var imgUploader = new ImageUploader();
 
@@ -105,7 +129,11 @@ $(function () {
         for (const imgfile of imgfiles) {
             formData.append("image", imgfile.file);
         }
-
+        for (var i = 0; i < imgfiles.length; i++) {
+            var imgfile = imgfiles[i]
+            upload(imgfile)
+        }
+        return
         submitting = true;
         $.showLoading('提交中，请等待');
         $.ajax({

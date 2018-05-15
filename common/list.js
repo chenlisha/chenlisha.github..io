@@ -1,4 +1,4 @@
-const qs = _cutil.QueryString();
+const  = _cutil.QueryString();
 
 let loading = false; // 判断是否加载完毕  false:加载中 ture:加载完毕
 let pageNumber = 1; // 当前页码数
@@ -137,7 +137,7 @@ function pagination() { // 滚动事件组件注册
 $(function() {
     FastClick.attach(document.body);
 
-    _cutil.wxlogin(PATROL_LOGIN, "patrol", qs.code, function (userObj) {
+    _cutil.wxlogin(PATROL_LOGIN, "patrol", .code, function (userObj) {
         theUserObj = userObj;
 
         init();
